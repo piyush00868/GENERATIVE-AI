@@ -1,12 +1,8 @@
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
+from  langchain_mistralai import ChatMistralAI
 
-load_dotenv()
+load_dotenv()  # Load environment variables from .env file  
 
-model = init_chat_model(
-    "gemini-3-flash-preview",
-    model_provider="google_genai"
-)
-
-response = model.invoke("What is Python?")
+model = ChatMistralAI(model="mistral-small-latest", temperature=0.1)
+response = model.invoke("What is python and use cases of it?")
 print(response.text)
