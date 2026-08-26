@@ -4,10 +4,14 @@ from  langchain_mistralai import ChatMistralAI
 load_dotenv()  # Load environment variables from .env file  
 
 model = ChatMistralAI(model="mistral-small-latest")
+#  add message history to the model
+messages = []
+print("-------------------------------- welcome to chat with Mistral AI --------------------------------")
 while True:
-    print("-------------------------------- welcome to chat with Mistral AI --------------------------------")
     prompt = input("You: ")
     if prompt == "0":
         break
-    response = model.invoke(prompt)
+    messages.append({"role": "user", "content": prompt})
+    response = model.invoke(messages)
+    messages.append({"role": "assistant", "content": response.text})
     print("Mistral AI:", response.text)
