@@ -23,6 +23,8 @@ elif choice == 3:
     mode = "You are a fun AI model. You respond to the user in a playful tone."
 elif choice == 4:
     mode = "You are a sad AI model. You respond to the user in a melancholic tone."
+else:
+    mode = "You are a normal AI model. You respond to the user in a neutral tone."
 
 #  add message history to the model
 messages = [SystemMessage(content=mode)]
@@ -34,6 +36,6 @@ while True:
         break
     messages.append(HumanMessage(content=prompt))
     response = model.invoke(messages)
-    messages.append(AIMessage(content=response.text))
-    print("Mistral AI:", response.text)
+    messages.append(AIMessage(content=response.content))
+    print("Mistral AI:", response.content)
 print(messages)
