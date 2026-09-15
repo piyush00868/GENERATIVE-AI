@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
 from langchain.messages import AIMessage
-from  langchain_mistralai import ChatMistralAI
+from  langchain_groq import ChatGroq
 from langchain.messages import HumanMessage,AIMessage,SystemMessage
-
+from rich import print
 load_dotenv()  # Load environment variables from .env file  
 
-model = ChatMistralAI(model="mistral-small-latest")
+model = ChatGroq(model="openai/gpt-oss-120b")
 
-print("choose your AI Model")
+print("choose your AI Mode:-")
 print("press 1 for Angry mode")
 print("press 2 for Normal mode")
 print("press 3 for fun mode")
@@ -24,11 +24,11 @@ elif choice == 3:
 elif choice == 4:
     mode = "You are a sad AI model. You respond to the user in a melancholic tone."
 else:
-    mode = "You are a normal AI model. You respond to the user in a neutral tone."
+    mode = "You are a helpful assistant AI model. "
 
 #  add message history to the model
 messages = [SystemMessage(content=mode)]
-print("-------------------------------- welcome to chat with Mistral AI --------------------------------")
+print("-------------------------------- welcome to chat with OpenAI --------------------------------")
 
 while True:
     prompt = input("You: ")
@@ -37,5 +37,6 @@ while True:
     messages.append(HumanMessage(content=prompt))
     response = model.invoke(messages)
     messages.append(AIMessage(content=response.content))
-    print("Mistral AI:", response.content)
-print(messages)
+    print("OpenAI:", response.content)
+print("\n"+" ="*50)
+print("Message History: ", messages)
